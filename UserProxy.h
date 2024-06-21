@@ -12,7 +12,7 @@ public:
         : user(user0), ver(ver0), enc(enc0){
     }
     void sendMessage(std::string mes) override{
-        user->sendMessage(mes);
+        user->sendMessage();
         std::cout << enc->encode(mes) << std::endl;
         std::cout << ver->verify(mes) << std::endl;
     }

@@ -11,8 +11,7 @@ private:
 	std::string username;
 public:
 	RealUser(std::string un): username(un){}
-	void sendMessage(std::string mes) {
+	void sendMessage() {
 		std::cout << username << std::endl;
-		std::cout << mes << std::endl;
 	}
 };
