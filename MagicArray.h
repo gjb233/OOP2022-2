@@ -8,18 +8,52 @@ class MagicArray;
 class plusInt : public Instruction{
 private:
     int index;
-    int argument;
+    int arg;
 public:
-    plusInt(int _index, int _argument) : index(_index), argument(_argument){
+    plusInt(int _index, int _arg) : index(_index), arg(_arg){
     }
     void apply(std::vector<int> &vec) override{
-        vec[index] += argument;
+        vec[index] += arg;
     }
     void apply(std::vector<double> &vec) override{
-        vec[index] += argument;
+        vec[index] += arg;
     }
     void output(){
-        cout << "arr[" << index << "] += " << argument << endl;
+        cout << "arr[" << index << "] += " << arg << endl;
+    }
+};
+
+class copyTo : public Instruction{
+private:
+    int indexTo, indexFrom;
+public:
+    copyTo(int i1, int i2) : indexTo(i1), indexFrom(i2){
+    }
+    void apply(std::vector<int> &vec) override{
+        vec[indexTo] = indexFrom;
+    }
+    void apply(std::vector<double> &vec) override{
+        vec[indexTo] = indexFrom;
+    }
+    void output(){
+        cout << "arr[" << indexTo << "] = " <<  "arr[" << indexTo << "]" << endl;
+    }
+};
+
+class plusTo : public Instruction{
+private:
+    int indexTo, indexFrom;
+public:
+    plusTo(int i1, int i2) : indexTo(i1), indexFrom(i2){
+    }
+    void apply(std::vector<int> &vec) override{
+        vec[indexTo] += indexFrom;
+    }
+    void apply(std::vector<double> &vec) override{
+        vec[indexTo] += indexFrom;
+    }
+    void output(){
+        cout << "arr[" << indexTo << "] += " <<  "arr[" << indexTo << "]" << endl;
     }
 };
 
@@ -31,7 +65,8 @@ public:
     element(MagicArray* _array, int _index) : array(_array), index(_index){
     }
     void operator+=(int i);
-    
+    void operator+=(element a);
+    void operator=(element a);
 };
 
 class MagicArray : public Instruction{
@@ -70,5 +105,15 @@ public:
 
 void element::operator+=(int i){
     Instruction* in = new plusInt(index, i);
+    array->getInstructions().push_back(in);
+}
+
+void element::operator=(element a){
+    Instruction* in = new copyTo(index, a.index);
+    array->getInstructions().push_back(in);
+}
+
+void element::operator+=(element a){
+    Instruction* in = new plusTo(index, a.index);
     array->getInstructions().push_back(in);
 }
