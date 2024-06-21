@@ -38,8 +38,8 @@ class MagicArray : public Instruction{
 private:
     vector<element> virtualArray;
     int num;
-public:
     vector<Instruction*> instructions;
+public:
     MagicArray(int n) : num(n){
         for(int i = 0; i < n; i++){
             virtualArray.push_back(element(this, i));
@@ -63,9 +63,12 @@ public:
             (*iter)->output();
         }
     }
+    vector<Instruction*>& getInstructions(){
+        return instructions;
+    }
 };
 
 void element::operator+=(int i){
     Instruction* in = new plusInt(index, i);
-    array->instructions.push_back(in);
+    array->getInstructions().push_back(in);
 }
