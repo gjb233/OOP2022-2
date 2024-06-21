@@ -57,6 +57,36 @@ public:
     }
 };
 
+class outputThis : public Instruction{
+private:
+    int index;
+public:
+    outputThis(int i) : index(i){
+    }
+    void apply(std::vector<int> &vec) override{
+        cout << vec[index];
+    }
+    void apply(std::vector<double> &vec) override{
+        cout << vec[index];
+    }
+    void output(){
+        cout << "cout << arr[" << index << "]" << endl;
+    }
+};
+
+class outputEnter : public Instruction{
+public:
+    void apply(std::vector<int> &vec) override{
+        cout << endl;
+    }
+    void apply(std::vector<double> &vec) override{
+        cout << endl;
+    }
+    void output(){
+        cout << "cout << endl" << endl;
+    }
+};
+
 class element{
 private:
     MagicArray* array;
@@ -67,6 +97,16 @@ public:
     void operator+=(int i);
     void operator+=(element a);
     void operator=(element a);
+    friend ostream& operator<<(ostream& out, element a);
+};
+
+class elementEnter{
+private:
+    MagicArray* array;
+public:
+    elementEnter(MagicArray* _array) : array(_array){
+    }
+    friend ostream& operator<<(ostream& out, elementEnter a);
 };
 
 class MagicArray : public Instruction{
@@ -98,6 +138,9 @@ public:
             (*iter)->output();
         }
     }
+    elementEnter endl(){
+        return elementEnter(this);
+    }
     vector<Instruction*>& getInstructions(){
         return instructions;
     }
@@ -116,4 +159,14 @@ void element::operator=(element a){
 void element::operator+=(element a){
     Instruction* in = new plusTo(index, a.index);
     array->getInstructions().push_back(in);
+}
+ostream& operator<<(ostream& out, element a){
+    Instruction* in = new outputThis(a.index);
+    a.array->getInstructions().push_back(in);
+    return out;
+}
+ostream& operator<<(ostream& out, elementEnter a){
+    Instruction* in = new outputEnter;
+    a.array->getInstructions().push_back(in);
+    return out;
 }
