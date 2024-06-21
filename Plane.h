@@ -11,6 +11,6 @@ public:
         return (wheel_num >= max_wheel_num) && (wing_num >= max_wing_num);
     };
     void run() override{
-        cout << "I'm flying and running" << endl;
+        cout << "I'm flying and runing" << endl;
     }
 };

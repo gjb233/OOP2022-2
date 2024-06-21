@@ -23,6 +23,6 @@ public:
         return wheel_num >= max_wheel_num;
     };
     virtual void run(){
-        cout << "I'm running" << endl;
+        cout << "I'm runing" << endl;
     };
 };
