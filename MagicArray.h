@@ -66,6 +66,6 @@ public:
 };
 
 void element::operator+=(int i){
-    Instruction* in = new plusInt(i, index);
+    Instruction* in = new plusInt(index, i);
     array->instructions.push_back(in);
 }
