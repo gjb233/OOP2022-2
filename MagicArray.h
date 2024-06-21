@@ -36,7 +36,7 @@ public:
         vec[indexTo] = vec[indexFrom];
     }
     void output(){
-        cout << "arr[" << indexTo << "] = " <<  "arr[" << indexTo << "]" << endl;
+        cout << "arr[" << indexTo << "] = " <<  "arr[" << indexFrom << "]" << endl;
     }
 };
 
@@ -53,7 +53,7 @@ public:
         vec[indexTo] += vec[indexFrom];
     }
     void output(){
-        cout << "arr[" << indexTo << "] += " <<  "arr[" << indexTo << "]" << endl;
+        cout << "arr[" << indexTo << "] += " <<  "arr[" << indexFrom << "]" << endl;
     }
 };
 
