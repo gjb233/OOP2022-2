@@ -30,10 +30,10 @@ public:
     copyTo(int i1, int i2) : indexTo(i1), indexFrom(i2){
     }
     void apply(std::vector<int> &vec) override{
-        vec[indexTo] = indexFrom;
+        vec[indexTo] = vec[indexFrom];
     }
     void apply(std::vector<double> &vec) override{
-        vec[indexTo] = indexFrom;
+        vec[indexTo] = vec[indexFrom];
     }
     void output(){
         cout << "arr[" << indexTo << "] = " <<  "arr[" << indexTo << "]" << endl;
@@ -47,10 +47,10 @@ public:
     plusTo(int i1, int i2) : indexTo(i1), indexFrom(i2){
     }
     void apply(std::vector<int> &vec) override{
-        vec[indexTo] += indexFrom;
+        vec[indexTo] += vec[indexFrom];
     }
     void apply(std::vector<double> &vec) override{
-        vec[indexTo] += indexFrom;
+        vec[indexTo] += vec[indexFrom];
     }
     void output(){
         cout << "arr[" << indexTo << "] += " <<  "arr[" << indexTo << "]" << endl;
