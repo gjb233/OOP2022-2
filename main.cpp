@@ -1,41 +1,33 @@
-#include <iostream>
-#include "Car.h" 
-#include "Plane.h" 
-#include "Motor.h" 
+# include <iostream>
+# include <string>
+# include "User.h"
+# include "UserProxy.h"
+# include "EncryptStrategy.h"
+# include "VerificationStrategy.h"
 using namespace std;
 
-int main() {
-    int m; 
-    cin >> m; 
-    Plane* planes = new Plane[1000]; 
-    Car* cars = new Car[1000]; 
-    Motor* motors = new Motor[1000]; 
-    int i_p = 0, i_c = 0, i_m = 0;
+int main(){
+	int N;
+	cin >> N;
+	for (int i = 0; i < N; ++ i) {
+		int ens, verf;
+		string uname, message;
+		cin >> ens >> verf;
+		cin >> uname >> message;
+		EncryptStrategy* encStr;
+		if (ens == 1)
+			encStr = new InsertStrategy();
+		else if (ens == 2)
+			encStr = new InvertStrategy();
+		VerificationStrategy* verStr;
+		if (verf == 1)
+			verStr = new PrefixStrategy();
+		else if (verf == 2)
+			verStr = new IntervalStrategy();
+		RealUser* ruser = new RealUser(uname);
+		UserProxy* uproxy = new UserProxy(ruser, encStr, verStr);
 
-    for (int i = 0; i < m; ++i) {
-        int op; 
-        cin >> op; 
-        if (op == 0) {// plane 
-            int part; 
-            cin >> part; 
-            if (part == 0) 
-                planes[i_p].add_wing(); 
-            else 
-                planes[i_p].add_wheel(); 
-
-            if (planes[i_p].finished())
-                planes[i_p++].run();
-        }
-        else if (op == 1) { // car 
-            cars[i_c].add_wheel(); 
-            if (cars[i_c].finished()) 
-                cars[i_c++].run(); 
-        }
-        else { // motor 
-            motors[i_m].add_wheel(); 
-            if (motors[i_m].finished())
-                motors[i_m++].run(); 
-        }
-    } 
-    return 0;
+		uproxy->sendMessage(message);
+	}
+	return 0;
 }
