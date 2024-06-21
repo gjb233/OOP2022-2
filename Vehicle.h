@@ -3,8 +3,8 @@
 using namespace std;
 class Vehicle{
 public:
-    int wheel_num;
-    int wing_num;
+    int wheel_num = 0;
+    int wing_num = 0;
     int max_wheel_num;
     int max_wing_num;
     void set_max_wheel_num(int n){
