@@ -1,8 +1,14 @@
 #include"Fraction.h"
 long long gcd(long long a, long long b){
+    if(a < 0) a = -a;
+    if(b < 0) b = -b; 
     return b ? gcd(b, a % b) : a;
 }
 Fraction::Fraction(long long p0, long long q0){
+        if(q0 < 0) {
+            p0 = -p0;
+            q0 = -q0;
+        }
         long long a = gcd(p0, q0);
         p = p0 / a;
         q = q0 / a;
