@@ -1,6 +1,9 @@
 #pragma once
 template<class T>
-T calculate(char expressionType, int x, int y, int z){
+T calculate(char expressionType, int _x, int _y, int _z){
+    T x = _x;
+    T y = _y;
+    T z = _z;
     if(expressionType == 'A'){
         return x * x + y * y + z * z;
     }

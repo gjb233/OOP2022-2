@@ -8,9 +8,9 @@ private:
 public:
     Fraction(long long p0, long long q0);
     Fraction(long long p0);
-    Fraction operator+(Fraction& a);
-    Fraction operator-(Fraction& a);
-    Fraction operator*(Fraction& a);
-    Fraction operator/(Fraction& a);
+    friend Fraction operator+(Fraction a, Fraction b);
+    friend Fraction operator-(Fraction a, Fraction b);
+    friend Fraction operator*(Fraction a, Fraction b);
+    friend Fraction operator/(Fraction a, Fraction b);
     friend ostream& operator<<(ostream& out, Fraction a);
 };

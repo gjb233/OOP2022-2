@@ -9,17 +9,17 @@ Fraction::Fraction(long long p0, long long q0){
     }
 Fraction::Fraction(long long p0) : p(p0), q(1){
 }
-Fraction Fraction::operator+(Fraction& a){
-    return Fraction(p * a.q + q * a.p, q * a.q);
+Fraction operator+(Fraction a, Fraction b){
+    return Fraction(a.p * b.q + a.q * b.p, a.q * b.q);
 }
-Fraction Fraction::operator-(Fraction& a){
-    return Fraction(p * a.q - q * a.p, q * a.q);
+Fraction operator-(Fraction a, Fraction b){
+    return Fraction(a.p * b.q - a.q * b.p, a.q * b.q);
 }
-Fraction Fraction::operator*(Fraction& a){
-    return Fraction(p * a.p, q * a.q);
+Fraction operator*(Fraction a, Fraction b){
+    return Fraction(b.p * a.p, b.q * a.q);
 }
-Fraction Fraction::operator/(Fraction& a){
-    return Fraction(p * a.q, q * a.p);
+Fraction operator/(Fraction a, Fraction b){
+    return Fraction(a.p * b.q, a.q * b.p);
 }
 ostream& operator<<(ostream& out, Fraction a){
     if(a.q == 1){
